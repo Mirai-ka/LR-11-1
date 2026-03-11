@@ -1,11 +1,3 @@
-C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\ProductsApi.csproj.AssemblyReference.cache
-C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\rpswa.dswa.cache.json
-C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\ProductsApi.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\ProductsApi.AssemblyInfoInputs.cache
-C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\ProductsApi.AssemblyInfo.cs
-C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\ProductsApi.csproj.CoreCompileInputs.cache
-C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\ProductsApi.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\ProductsApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\CoordinatedTurn\Desktop\ProductsApi\bin\Debug\net9.0\appsettings.Development.json
 C:\Users\CoordinatedTurn\Desktop\ProductsApi\bin\Debug\net9.0\appsettings.json
 C:\Users\CoordinatedTurn\Desktop\ProductsApi\bin\Debug\net9.0\ProductsApi.staticwebassets.endpoints.json
@@ -18,6 +10,15 @@ C:\Users\CoordinatedTurn\Desktop\ProductsApi\bin\Debug\net9.0\Microsoft.OpenApi.
 C:\Users\CoordinatedTurn\Desktop\ProductsApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\CoordinatedTurn\Desktop\ProductsApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\CoordinatedTurn\Desktop\ProductsApi\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\ProductsApi.csproj.AssemblyReference.cache
+C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\rpswa.dswa.cache.json
+C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\ProductsApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\ProductsApi.AssemblyInfoInputs.cache
+C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\ProductsApi.AssemblyInfo.cs
+C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\ProductsApi.csproj.CoreCompileInputs.cache
+C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\ProductsApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\ProductsApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\ProductsApi.sourcelink.json
 C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\rjimswa.dswa.cache.json
 C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\rjsmrazor.dswa.cache.json
 C:\Users\CoordinatedTurn\Desktop\ProductsApi\obj\Debug\net9.0\rjsmcshtml.dswa.cache.json

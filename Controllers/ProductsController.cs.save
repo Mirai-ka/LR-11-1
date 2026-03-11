@@ -60,42 +60,45 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPost]
-public ActionResult<Product> Post([FromBody] CreateProductRequest request)
-{
-    var product = new Product
+    public ActionResult<Product> Post([FromBody] Product product)
     {
-        Id = _products.Max(p => p.Id) + 1,
-        Name = request.Name,
-        Category = request.Category,
-        Price = request.Price,
-        CreatedAt = DateTime.Now
-    };
-    _products.Add(product);
-    return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
-}
+        if (!ModelState.IsValid)
+            return BadRequest(new { error = "ValidationError", message = string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage)) });
 
-[HttpPut("{id}")]
-public ActionResult Put(int id, [FromBody] UpdateProductRequest request)
-{
-    var existing = _products.FirstOrDefault(p => p.Id == id);
-    if (existing == null)
-        return NotFound(new { error = "NotFound", message = $"Product with id {id} not found" });
-    
-    existing.Name = request.Name;
-    existing.Category = request.Category;
-    existing.Price = request.Price;
-    return NoContent();
-}
+        product.Id = _products.Max(p => p.Id) + 1;
+        product.CreatedAt = DateTime.Now;
+        _products.Add(product);
+        return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
+    }
 
+    [HttpPut("{id}")]
+    public ActionResult Put(int id, [FromBody] Product product)
+    {
+        var existing = _products.FirstOrDefault(p => p.Id == id);
+        if (existing == null)
+            return NotFound(new { error = "NotFound", message = $"Product with id {id} not found" });
+
+        existing.Name = product.Name;
+        existing.Category = product.Category;
+        existing.Price = product.Price;[HttpPut("{id}")]
+    public ActionResult Put(int id, [FromBody] Product product)
+    {
+        var existing = _products.FirstOrDefault(p => p.Id == id);
+        if (existing == null)
+            return NotFound(new { error = "NotFound", message = $"Product with >
+
+        existing.Name = product.Name;
+        existing.Category = product.Category;
+        existing.Price = product.Price;
+        return NoContent();
+    }
+
+        return NoContent();
+    }
 
     [HttpDelete("{id}")]
     public ActionResult Delete(int id)
     {
         var product = _products.FirstOrDefault(p => p.Id == id);
         if (product == null)
-            return NotFound(new { error = "NotFound", message = $"Product with id {id} not found" });
-
-        _products.Remove(product);
-        return NoContent();
-    }
-}
+            return NotFound(new { error = "NotFound", message = $"Produ
