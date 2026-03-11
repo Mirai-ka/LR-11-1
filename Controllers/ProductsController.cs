@@ -1,0 +1,97 @@
+using Microsoft.AspNetCore.Mvc;
+using ProductsApi.Models;
+using System.Linq;
+
+namespace ProductsApi.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class ProductsController : ControllerBase
+{
+    private static List<Product> _products = new()
+    {
+        new() { Id = 1, Name = "Книга по C#", Category = "Books", Price = 500m, CreatedAt = DateTime.Now.AddDays(-10) },
+        new() { Id = 2, Name = "Ноутбук", Category = "Electronics", Price = 50000m, CreatedAt = DateTime.Now.AddDays(-5) },
+        new() { Id = 3, Name = "Клавиатура", Category = "Electronics", Price = 2000m, CreatedAt = DateTime.Now.AddDays(-2) },
+        new() { Id = 4, Name = "Java для новичков", Category = "Books", Price = 800m, CreatedAt = DateTime.Now.AddDays(-15) },
+        new() { Id = 5, Name = "Мышка", Category = "Electronics", Price = 1000m, CreatedAt = DateTime.Now }
+    };
+
+    [HttpGet]
+    public ActionResult<object> GetAll([FromQuery] ProductQueryParams query)
+    {
+        try
+        {
+            var q = _products.AsQueryable();
+
+            // Фильтрация
+            if (query.MinPrice.HasValue)
+                q = q.Where(p => p.Price >= query.MinPrice.Value);
+            if (query.MaxPrice.HasValue)
+                q = q.Where(p => p.Price <= query.MaxPrice.Value);
+            if (!string.IsNullOrWhiteSpace(query.Category))
+                q = q.Where(p => p.Category.Contains(query.Category, StringComparison.OrdinalIgnoreCase));
+
+            // Сортировка
+            if (query.SortBy?.ToLower() == "price")
+                q = query.SortOrder?.ToLower() == "desc" ? q.OrderByDescending(p => p.Price) : q.OrderBy(p => p.Price);
+            else
+                q = q.OrderBy(p => p.Id);
+
+            var totalCount = q.Count();
+            var pageSize = Math.Clamp(query.PageSize, 1, 50);
+            var items = q.Skip((query.Page - 1) * pageSize).Take(pageSize).ToList();
+
+            return Ok(new { items, totalCount, page = query.Page, pageSize });
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { error = "InvalidQuery", message = ex.Message });
+        }
+    }
+
+    [HttpGet("{id}")]
+    public ActionResult<Product> Get(int id)
+    {
+        var product = _products.FirstOrDefault(p => p.Id == id);
+        if (product == null)
+            return NotFound(new { error = "NotFound", message = $"Product with id {id} not found" });
+        return Ok(product);
+    }
+
+    [HttpPost]
+    public ActionResult<Product> Post([FromBody] Product product)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(new { error = "ValidationError", message = string.Join(", ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage)) });
+
+        product.Id = _products.Max(p => p.Id) + 1;
+        product.CreatedAt = DateTime.Now;
+        _products.Add(product);
+        return CreatedAtAction(nameof(Get), new { id = product.Id }, product);
+    }
+
+    [HttpPut("{id}")]
+    public ActionResult Put(int id, [FromBody] Product product)
+    {
+        var existing = _products.FirstOrDefault(p => p.Id == id);
+        if (existing == null)
+            return NotFound(new { error = "NotFound", message = $"Product with id {id} not found" });
+
+        existing.Name = product.Name;
+        existing.Category = product.Category;
+        existing.Price = product.Price;
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public ActionResult Delete(int id)
+    {
+        var product = _products.FirstOrDefault(p => p.Id == id);
+        if (product == null)
+            return NotFound(new { error = "NotFound", message = $"Product with id {id} not found" });
+
+        _products.Remove(product);
+        return NoContent();
+    }
+}
